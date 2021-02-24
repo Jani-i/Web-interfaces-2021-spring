@@ -1,11 +1,13 @@
 const express = require('express');
 const app = express();
-const port = 4000;
+//const port = 4000;
 const bodyParser = require('body-parser');
 //const multerUpload = multer({ dest: 'uploads'});
 const cloudinary = require('cloudinary').v2
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const multer = require('multer');
+
+app.set('port', (process.env.PORT || 80));
 
 
 const storage = new CloudinaryStorage({
@@ -81,6 +83,6 @@ app.post('/login/register', (req, res) => {
 })
 
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+app.listen(app.get('port'), function() {
+  console.log(`Example app listening at`, app.get('port'));
 })

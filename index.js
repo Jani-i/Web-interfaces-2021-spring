@@ -98,16 +98,39 @@ app.put('/items/modifyItem/:id', (req, res) => {
 });
 
 //Find items based on category
-/*
-app.get('/items', (req, res) => {
-  res.send('All items')
+app.get('/items/category/:category', (req, res) => {
+  const {category} = req.params
+  
+  pool.query(
+    "SELECT * FROM items WHERE category = $1",
+    [category],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+
+      res.status(200).json(results.rows);
+    }
+  );
 })
 
 //Find items based on date
-app.get('/items', (req, res) => {
-  res.send('All items')
+app.get('/items/date/:date', (req, res) => {
+  const {date} = req.params
+
+  pool.query(
+    "SELECT * FROM items WHERE date = $1",
+    [date],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+
+      res.status(200).json(results.rows);
+    }
+  );
 })
-*/
+
 //Get a single item
 app.get('/items/:id', (req, res) => {
   const { id } = req.params;
@@ -126,11 +149,22 @@ app.get('/items/:id', (req, res) => {
 })
 
 //Find items based on location
-/*
-app.get('/items', (req, res) => {
-  res.send('All items')
+app.get('/items/location/:location', (req, res) => {
+  const { location } = req.params;
+  
+  pool.query(
+    "SELECT * FROM items WHERE location = $1",
+    [location],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+
+      res.status(200).json(results.rows);
+    }
+  );
 })
-*/
+
 
 //Login to users account
 app.post('/login', (req, res) => {

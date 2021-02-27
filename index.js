@@ -3,8 +3,6 @@ const app = express();
 //const port = 4000;
 const bodyParser = require('body-parser');
 //const multerUpload = multer({ dest: 'uploads'});
-//const cloudinary = require('cloudinary').v2
-//const { CloudinaryStorage } = require('multer-storage-cloudinary');
 //const multer = require('multer');
 const cors = require('cors');
 const pool = require('./db');
@@ -15,24 +13,7 @@ const users = require('./services/users');
 app.set('port', (process.env.PORT || 80));
 app.use(cors());
 app.use(bodyParser.json());
-/*
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: '',
-    format: async (req, file) => ['png', 'jpg'], // supports promises as well
-    public_id: (req, file) => 'computed-filename-using-request',
-  },
-});
- */
-//const parser = multer({ storage: storage });
-/*
-app.post('/upload', parser.single('image'), function (req, res) {
-  console.log(req.file);
-  res.status(201);
-  res.json(req.file);
-});
-*/
+
 
 
 const passport = require('passport');
@@ -303,9 +284,6 @@ passport.use(new JwtStrategy(options, function(jwt_payload, done) {
   console.log(jwt_payload);
 
 
-  /* Here you could do some processing based on the JWT payload.
-  For example check if the key is still valid based on expires property.
-  */
   const now = Date.now() / 1000;
   if(jwt_payload.exp > now) {
     done(null, jwt_payload.user);

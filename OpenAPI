@@ -1,0 +1,509 @@
+openapi: 3.0.0
+info:
+  title: Excercise-2021-spring
+  version: '1.0'
+servers:
+  - url: 'http://localhost:4000'
+paths:
+  /login:
+    post:
+      summary: ''
+      operationId: post-login
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      description: Login to user's account.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: fname.lname@mail.com
+                  format: email
+                password:
+                  type: string
+                  format: password
+                  example: password123
+            examples:
+              example-1:
+                value:
+                  email: fname.lname@mail.com
+                  password: password123
+  /login/register:
+    post:
+      summary: ''
+      operationId: post-login-register
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+      description: Register a user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                '':
+                  $ref: '#/components/schemas/User'
+            examples:
+              example-1:
+                value:
+                  '':
+                    id: 0
+                    firstName: first name
+                    lastName: last name
+                    email: fname.lname@mail.com
+                    dateOfBirth: '1997-10-31'
+                    emailVerified: true
+                    createDate: '2019-08-24'
+                    password: password123
+  /items:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      operationId: get-items
+      description: Get all the items.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                '':
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Item'
+            examples:
+              example-1:
+                value:
+                  '':
+                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      title: bike
+                      description: Nice tires.
+                      category: vehicle
+                      location: Oulu FI
+                      images: string
+                      price: '23,50'
+                      dateOfPosting: '2019-08-24'
+                      delivery: shipping/pickup
+                      sellerName: John Smith
+                      phoneNumber: 501235566
+                      email: John.Smith@mail.com
+  '/items/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      operationId: get-items-itemID
+      description: Get a single item.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                '':
+                  $ref: '#/components/schemas/Item'
+            examples:
+              example-1:
+                value:
+                  '':
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    title: bike
+                    description: Nice tires.
+                    category: vehicle
+                    location: Oulu FI
+                    images: string
+                    price: '23,50'
+                    dateOfPosting: '2019-08-24'
+                    delivery: shipping/pickup
+                    sellerName: John Smith
+                    phoneNumber: 501235566
+                    email: John.Smith@mail.com
+  /items/createItem:
+    post:
+      summary: ''
+      operationId: post-items-createItem
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+      description: Create a new item.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                '':
+                  $ref: '#/components/schemas/Item'
+            examples:
+              example-1:
+                value:
+                  '':
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    title: bike
+                    description: Nice tires.
+                    category: vehicle
+                    location: Oulu FI
+                    images: string
+                    price: '23,50'
+                    dateOfPosting: '2019-08-24'
+                    delivery: shipping/pickup
+                    sellerName: John Smith
+                    phoneNumber: 501235566
+                    email: John.Smith@mail.com
+  '/items/deleteItem/{id}':
+    delete:
+      summary: ''
+      operationId: delete-items-deleteItem
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+      description: Delete an item.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                '':
+                  $ref: '#/components/schemas/Item'
+            examples:
+              example-1:
+                value:
+                  '':
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    title: bike
+                    description: Nice tires.
+                    category: vehicle
+                    location: Oulu FI
+                    images: string
+                    price: '23,50'
+                    dateOfPosting: '2019-08-24'
+                    delivery: shipping/pickup
+                    sellerName: John Smith
+                    phoneNumber: 501235566
+                    email: John.Smith@mail.com
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+  '/items/modifyItem/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    put:
+      summary: ''
+      operationId: put-items-modifyItem-itemID
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+      description: Change information on an item.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                '':
+                  $ref: '#/components/schemas/Item'
+            examples:
+              example-1:
+                value:
+                  '':
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    title: bike
+                    description: Nice tires.
+                    category: vehicle
+                    location: Oulu FI
+                    images: string
+                    price: '23,50'
+                    dateOfPosting: '2019-08-24'
+                    delivery: shipping/pickup
+                    sellerName: John Smith
+                    phoneNumber: 501235566
+                    email: John.Smith@mail.com
+  '/items/category/{category}':
+    parameters:
+      - schema:
+          type: string
+        name: category
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      operationId: get-items-category
+      description: Find items based on the category.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                '':
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Item'
+            examples:
+              example-1:
+                value:
+                  '':
+                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      title: bike
+                      description: Nice tires.
+                      category: vehicle
+                      location: Oulu FI
+                      images: string
+                      price: '23,50'
+                      dateOfPosting: '2019-08-24'
+                      delivery: shipping/pickup
+                      sellerName: John Smith
+                      phoneNumber: 501235566
+                      email: John.Smith@mail.com
+  '/items/location/{location}':
+    parameters:
+      - schema:
+          type: string
+        name: location
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      operationId: get-items-location
+      description: Find items based on location.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                '':
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Item'
+            examples:
+              example-1:
+                value:
+                  '':
+                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      title: bike
+                      description: Nice tires.
+                      category: vehicle
+                      location: Oulu FI
+                      images: string
+                      price: '23,50'
+                      dateOfPosting: '2019-08-24'
+                      delivery: shipping/pickup
+                      sellerName: John Smith
+                      phoneNumber: 501235566
+                      email: John.Smith@mail.com
+  '/items/date/{date}':
+    parameters:
+      - schema:
+          type: string
+        name: date
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      operationId: get-items-dateOfPosting
+      description: Find items based on the date of posting.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                '':
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Item'
+            examples:
+              example-1:
+                value:
+                  '':
+                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      title: bike
+                      description: Nice tires.
+                      category: vehicle
+                      location: Oulu FI
+                      images: string
+                      price: '23,50'
+                      dateOfPosting: '2019-08-24'
+                      delivery: shipping/pickup
+                      sellerName: John Smith
+                      phoneNumber: 501235566
+                      email: John.Smith@mail.com
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      description: ''
+      x-examples:
+        example-2:
+          id: 0
+          firstName: first name
+          lastName: last name
+          email: fname.lname@mail.com
+          dateOfBirth: '1997-10-31'
+          emailVerified: true
+          createDate: '2019-08-24'
+          password: password123
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the given user.
+        firstName:
+          type: string
+          example: first name
+        lastName:
+          type: string
+          example: last name
+        email:
+          type: string
+          format: email
+          example: fname.lname@mail.com
+        dateOfBirth:
+          type: string
+          format: date
+          example: '1997-10-31'
+        emailVerified:
+          type: boolean
+          description: Set to true if the user's email has been verified.
+        createDate:
+          type: string
+          format: date
+          description: The date that the user was created.
+        password:
+          type: string
+          format: password
+          example: password123
+      required:
+        - id
+        - firstName
+        - lastName
+        - email
+        - emailVerified
+    Item:
+      title: Item
+      type: object
+      x-examples:
+        example-1:
+          id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+          title: bike
+          description: Nice tires.
+          category: vehicle
+          location: Oulu FI
+          images: string
+          price: '23,50'
+          dateOfPosting: '2019-08-24'
+          delivery: shipping/pickup
+          sellerName: John Smith
+          phoneNumber: 501235566
+          email: John.Smith@mail.com
+      description: ''
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          type: string
+          example: bike
+        description:
+          type: string
+          example: Nice tires.
+        category:
+          type: string
+          example: vehicle
+        location:
+          type: string
+          example: Oulu FI
+        images:
+          type: string
+        price:
+          type: number
+          format: float
+          example: '23,50'
+        dateOfPosting:
+          type: string
+          format: date
+        delivery:
+          type: string
+          example: shipping/pickup
+        sellerName:
+          type: string
+          example: John Smith
+        phoneNumber:
+          type: number
+          example: 501235566
+        email:
+          type: string
+          example: John.Smith@mail.com
+          format: email
+      required:
+        - id
+        - title
+        - description
+        - category
+        - location
+        - images
+        - price
+        - dateOfPosting
+        - delivery
+        - sellerName
+        - phoneNumber
+        - email
+  securitySchemes: {}

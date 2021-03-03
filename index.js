@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-//const port = 4000;
+const port = 4000;
 const bodyParser = require('body-parser');
 //const multerUpload = multer({ dest: 'uploads'});
 //const multer = require('multer');
@@ -10,7 +10,7 @@ const bcrypt = require('bcryptjs');
 const users = require('./services/users');
 
 
-app.set('port', (process.env.PORT || 80));
+//app.set('port', (process.env.PORT || 80));
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -333,12 +333,11 @@ app.get('/loginForJWT',
 
 
 
-
+/*
 app.listen(app.get('port'), function() {
   console.log(`Example app listening at`, app.get('port'));
 });
-/*
+*/
 app.listen(port, () => {
   console.log(`Server API listening on http://localhost:${port}\n`);
 });
-*/

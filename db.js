@@ -1,4 +1,4 @@
-const Pool = require('pg').Pool;
+//const Pool = require('pg').Pool;
 //require("dotenv").config();
 /*
 const devConfig = {
@@ -18,15 +18,27 @@ const pool = new Pool({
 })
 */
 
+const { Client } = require('pg');
+
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
+client.connect();
 
 
 
+
+/*
 const pool = new Pool({
   user: "cijjsoxqkvzcam",
   password: "69ccede74963990a7710f70e2ee872777d816b2394d16c62558842e4e8fcb649",
   host: "ec2-54-74-156-137.eu-west-1.compute.amazonaws.com",
   database: "d534epu70a8o16",
   port: 5432,
-})
+})/*/
 
-module.exports = pool;
+module.exports = client;

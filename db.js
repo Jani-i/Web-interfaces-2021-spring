@@ -32,13 +32,5 @@ client.connect();
 
 
 
-/*
-const pool = new Pool({
-  user: "cijjsoxqkvzcam",
-  password: "69ccede74963990a7710f70e2ee872777d816b2394d16c62558842e4e8fcb649",
-  host: "ec2-54-74-156-137.eu-west-1.compute.amazonaws.com",
-  database: "d534epu70a8o16",
-  port: 5432,
-})/*/
 
 module.exports = client;
